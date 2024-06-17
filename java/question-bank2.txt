@@ -1,0 +1,13 @@
+Difference b/w failfast and failsafe iterators ?
+
+Failfast iterators - these throw ConcurrentModification Exception when one Thread is iterating
+over collection object while other thread is structurally modifying COllection(adding, deleting, modifying)
+objects on underlying collection, They are call failfast because they immediately throw exception when
+they encounter failure.
+
+FailSafe - doesnt throw any exception is modified structurally because they work on clone of the 
+collection instead of the original Collection.
+
+---------------------------------------------------
+
+What do you understand by blocking Queue ?

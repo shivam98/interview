@@ -1,0 +1,128 @@
+Java Notes
+
+Marker Interface ?
+An interface having no data member and member fn, An empty interface basically. eg seriazable, cloneable
+
+-------------------------------------------------------
+
+Can you override a private or static method in java ?
+1. you can override  a private or static method in java.
+2. cant override private method because its not accessible in the child class. If you try to override
+    in the sub class it will create another private method in subclass which will be different from the parent one.
+3. For static method if you create  a similar method  with same return type and same method args in child class,
+    then it will hide the superclass method which is known as method hiding.
+Note: for static method you can directly call it by className or from object of that class is also possible.
+
+-------------------------------------------------------
+
+Does finally always execute in java ?
+Not in following cases - 1. System.exit() 2. system crash
+
+-------------------------------------------------------
+
+What objects does Object class have ?
+Java.lang.Object, parent of all objects has following methods-
+clone() - creates and returns the copy of this object,
+equals() - checks if an obj is equal to this one,
+finalize() -called by garbage collector when there is no reference to this object. 
+getClass() - returns runtime class of the object
+hashCode() - returns hashcode value of that object
+toString() - returns string representation of the object.
+
+-------------------------------------------------------
+
+How can you make your class immutable ? [IMPORTANT]
+You need to do 6 steps to make your class imm - 
+1. Declare your class as final so it cant be extended. [on class]
+2. Make all fields private so direct access is not allowed [on field]
+3. Dont provide setter methods for the variables. [on setter]
+4. Make all mutable fields final so that its value can be assigned only once. [on field]
+5. Initialize all the fields via a constructor performing a deep copy. [on field]
+6. Peform cloning of objects  in the getter methods to return a copy  rather than returning the actual
+    object reference. [on getter]
+
+-------------------------------------------------------
+
+What is singleton class and how do we make a class singleton ?
+
+Singleton is a class whose only one instance can be created at any given time, in one JVM. basically a design pattern.
+public class Animal{
+    private static Animal singleton_instance = null; // private static reference of object of same class.
+    private Animal(){} // constructor private
+    public static Animal getInstance() { // a method which returns the object of this class only once.
+        if(singleton_instance==null) {
+            singleton_instance = new Animal();
+        }
+        return singleton_instance;
+    }
+}
+-------------------------------------------------------
+
+Collection Framework
+
+Collection(I) - java.util.Collection is the root of java collection framework and most of the collections in java
+    are inherited from this interface, expect Map Interface.
+
+COllection extended by  List, Queue, Set, Map is separate(doesnt extend Collection interface)
+
+List - java.util.List, contains ordered elements, may include duplicates, supports the index based search, random access 
+    but elements can be easily inserted irrespective of the position.
+
+Set - java.util.Set, doesnt define an order for elements hence index based search not supported, doesnt contain duplicates.
+
+Queue- java.util.Queue, follows FIFO approach, Elements add at rear end and removed from the front end.
+  
+Map - java.util.Map, represents a key, value pair, doesnt implement/extend the Collection, contains only unique keys,
+    can have duplicate values.
+                        ----------------------------------------
+
+List -                                            extends
+List -> ArrayList -> LinkedList -> Vector, Stack ----------> Vector
+
+ArrayList - Dynamic resizing (50% of original size), non synchronized.
+LinkedList - implements List and Deque interfaces, maintains the insertion order, non synchronized, doesnt support random   
+    access of elements, can use list iterator to iterate through elements.
+Vector - Vector is synchronized, maintains the insertion order, thread safe, vector increases its size by doubling the 
+    array size, its a legacy class.
+Stack - last in first out(LIFO), the elements are added as well as removed from the rear end.
+                    ----------------------------------------
+Set - 
+Set(I) - HashSet(C) - LinkedHashSet(C)
+Set(I) - SortedSet(I) - TreeSet(C)
+
+HashSet - implicitly implements a hashtable, contains only unique elements, only one null element can be added,
+    its unordered as set.
+LinkedHashSet - ordered Version of hashset which maintains the doubly linkedlist across all elements. It preserves
+    the insertion order.
+SortedSet - All elements of sortedSet must implement the Comparable interface, as it stores elements in ascending order.
+TreeSet -  uses a Tree for storage(self balancing BST like Red Black Tree), objects in a TreeSet are stored in a sorted
+    and ascending order.
+                    ----------------------------------------
+Queue(I) - PriorityQueue(C)
+Queue(I) - Deque(I) - ArrayDeque
+
+PriorityQueue - is a queue with priority associated with each element, high priority element is served before a low priority
+    element irrespective of their insertion order.
+Deque(I) - refers to Double ended queue, elements can be added or removed from either end.
+ArrayDeque(C) - way to apply resizable array in addition to implemention of Deque interface, no capacity restrictions.
+
+                    ----------------------------------------
+Map(I) ---> HashMap(C) ---> HashTable(C)
+Map(I) ----> SortedMap(I) ----> TreeMap
+
+HashMap(C) - It is non synchronized in nature, allows only one null key, but multiple null values.
+HashTable(C) - It is synchronized in nature, Doesnt allow any null key or value.
+SortedMap(I) - Entries are maintained in ascending order, implicitly implements RedBlack Tree implementation, cant store any null key.
+
+-------------------------------------------------------
+Why Map doesnt extend the collection interface ?
+
+Map interface follows a key/value pair structure, whereas all other Collection inteface is a collection of objects which are stored
+in a structured manner with a specified access mechanism.
+
+Main reason why it doesnt extend collection interface is that add(E e) method of Collection interface doenst support the key/value
+pair like map interface's put(k, v) method.
+
+public interface List<E> extends Collection<E> {}
+public interface Map<K,V> {} // doesnt extend collection
+-------------------------------------------------------

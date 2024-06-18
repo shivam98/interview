@@ -9,5 +9,110 @@ FailSafe - doesnt throw any exception is modified structurally because they work
 collection instead of the original Collection.
 
 ---------------------------------------------------
-
+21:20
 What do you understand by blocking Queue ?
+
+The java BlockingQueue interface, java.util.concurrentBlockingQueue represents a queue which is thread safe
+to put elements into and take elements out from, in other words multiple threads can be inserting and
+taking elements concurrently from a java BlockingQueue, without any concurrency issue arising.
+
+basically, its thread safe queue.
+
+----------------------------------------------------
+
+Difference b/w synchronized collection and concurrent collection ?
+
+Both Synchronized and Concurrent Collection classes provide thread safety.
+the difference between them comes in peformance, scalability and how they achieve thread safety
+Synchronized collections like synchronized HashMap are much slower than their concurrent counterparts eg.
+ConcurrentHashMap, Main reason for this slowness is Locking.
+
+lets say our collection is  divided into segments s1, s2, s3, s4, and a thread tries write operation on s1
+in case of synchronized all segments are locked by this thread and other threads have to wait.
+While in concurrent collection only segment1 is locked for read and write while all other 3 segments are open 
+for other threads. It is called lock striping.
+
+----------------------------------------------------
+
+Internal working of HashMap
+
+HashMap in java works on hashing principle where a hash function are used to link key and value in HashMap,
+Objects(Map.Entry -> contains both key and value object) are stored by calling put(key, value)method of
+HashMap and retrieved by calling get(key) method.
+
+When we call put method, hashCode() method of the key object is called which calculates an index of the 
+bucket location where we can store the value object.
+
+To retrieve, you call the get() method and again pass the key object, which lands you up at same index or 
+bucket and you retrieve the value object.
+
+Diagram - https://www.youtube.com/watch?v=KfoNYoVUBJI&t=1383s
+
+In case of collision(multiple keys give same hashcode which gives same bucket number), a new node will be 
+inserted after current node at the same bucket location in the form of linked list.
+
+in case of get(key) operation it will get a bucket location (by getting hashCode of key)
+ and then traverse the linked list present there starting from the first node and compare
+ all keys of all nodes using equals() method until if finds it and returns the value.
+
+ ----------------------------------------------------
+
+
+ ----------------------------------------------------
+
+
+ ----------------------------------------------------
+
+
+
+ ----------------------------------------------------
+
+
+
+ ----------------------------------------------------
+
+
+ ----------------------------------------------------
+
+
+
+ ----------------------------------------------------
+
+
+ 
+ ----------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

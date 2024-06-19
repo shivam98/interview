@@ -9,7 +9,7 @@ FailSafe - doesnt throw any exception is modified structurally because they work
 collection instead of the original Collection.
 
 ---------------------------------------------------
-21:20
+
 What do you understand by blocking Queue ?
 
 The java BlockingQueue interface, java.util.concurrentBlockingQueue represents a queue which is thread safe
@@ -57,6 +57,92 @@ in case of get(key) operation it will get a bucket location (by getting hashCode
 
  ----------------------------------------------------
 
+Is Java pass by value or pass by reference ?
+
+pass by value : from calling function we pass a copy of the variable and not the address so any change
+    done to that variable in the other function will not reflect in the calling function variable.
+
+pass by reference : we pass the original reference of the variable so any change done to that variable
+    in that reference will also reflect in the calling function variable.
+
+public class Animal{
+    int eyes;
+    protected String animalName ="mouse";
+    public static void main(){
+        Animal animalobj = new Animal();
+        animalobj.eyes=2;
+        int a = 3;
+        changePrimitives(a);
+        Syso("value of a is " +a); // 3, will retain original as while passing java changes its reference.
+        changeObjectReference(animalobj);
+        Syso(animalobj.eyes); // 12, it changed because we are passing a reference/memory address.
+    }
+    public static void changePrimitives(int aCopy) {
+        aCopy = 13;
+    }
+    public static void changeObjectReference(Animal animalobjCopy){
+        animalobjCopy = 12;
+    }
+}
+
+By default if we pass the object, you are actually passing the reference hence change is reflected.
+But for primitive types we can see that its not changed(it passes copy of variable inside different reference),
+Hence Java is pass by value. 
+
+ ----------------------------------------------------
+
+ Why do we need Comparator and Comparable Interfaces in JAVA ?
+  
+  int[] arr = new int[]{3, 1, 5, 2};
+  Arrays.sort(arr); // will sort the array
+
+but for custom java objects like Employee, this is not true.
+    Employee[] emparr = new Employee[4]; // then add some employees like {{1,"shiv"},{2,"abhi"}...}.
+    This will throw an exception : cant cast Employee to java.lang.Comparable;
+
+Hence we need Comparable and Comparator interface for custom objects in java.
+
+1. To implement Comparable we need to implement Comparable interface in the Employee class.
+2. also we need to override compareTo() method of Comparable interface.
+
+public class Employee implements Comparable<T> {
+    ...
+    @Override 
+    public int compareTo(Employee o) { 
+        return this.id - o.id; // it can return 0, -ve, +ve
+    }
+}
+Now this class cast exception will not come.
+
+Now with comparable we can only do sorting based on one id, but if we want to use both id first(default) then
+by name then we can use Comparator. ??
+
+public class Employee implements Comparable<T> {
+    ...
+    @Override 
+    public int compareTo(Employee o) { 
+        return this.id - o.id; // it can return 0, -ve, +ve
+    }
+    
+    public static Comparator<Employee> NameComparator = new Comparator<Employee>() { // anonymous class
+        @Override
+        public int compare(Employee e1, Employee e2) { 
+            return e1.getName().compareTo(e2.getName());
+        }
+    }
+}
+in calling class =>  Arrays.sort(emparr, Employee.NameComparator);
+// this will sort according to name.
+
+ ----------------------------------------------------
+Comparator Vs Comparable
+
+
+
+
+ ----------------------------------------------------
+
+
 
  ----------------------------------------------------
 
@@ -69,17 +155,6 @@ in case of get(key) operation it will get a bucket location (by getting hashCode
 
 
 
- ----------------------------------------------------
-
-
- ----------------------------------------------------
-
-
-
- ----------------------------------------------------
-
-
- 
  ----------------------------------------------------
 
 

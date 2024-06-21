@@ -135,59 +135,143 @@ in calling class =>  Arrays.sort(emparr, Employee.NameComparator);
 // this will sort according to name.
 
  ----------------------------------------------------
+
 Comparator Vs Comparable
 
+comparable - 
+1. There is no arg required in Arrays.sort();
+2. belongs to java.lang so no import required where class is defined.
+3. only natural ordering is possible, only one way(eg. using id).
+4. source code requires to be changed, so if source code is 3rd party we cant change that.
 
-
-
- ----------------------------------------------------
-
-
-
- ----------------------------------------------------
-
-
- ----------------------------------------------------
-
-
+comparator -
+1. We need to pass Comparator object as an additional parameter to Arrays.sort()
+2. belongs to java.util package.
+3. We can create n number of compartors and based on different fields we can do sorting.
+4. No need to change source code (Employee class), simply create a Comparator class and use it to sort.
 
  ----------------------------------------------------
+Equals and HashCode contract - 
+
+public class Employee {
+    private int id; private String name;
+    // getters setters
+    
+    // @Override ?? need or not ?
+    public boolean equals(Object o) {
+        if(o==null || getClass() != o.getClass()) {
+            return false;
+        } else if(o == this) {
+            return true; // if same reference then its the same object, no need to check details.
+        } else {
+            Employee e = (Employee) o;
+            return (this.getId() == e.getId());
+
+        }
+    }
+}
+public class Main{
+    psvm() {
+        Employee e1 = new Employee();
+        e1.setId(1); e1.setName("John");
+        Employee e2 = new Employee();
+        e1.setId(1); e1.setName("John");
+
+// below does the memory comparison
+        Syso("shallow comparison", (e1==e2)); // False 
+// below does the memory comparison and internal details also
+        Syso("deep comparison", (e1.equals(e2))) // False 
+
+// now we want to make sure 2 objects are same if their id is same, for that we will orverride equals 
+    method in the Employee class
+
+// below is after implementing equals method, shallow comparison will be false
+Syso("deep comparison", (e1.equals(e2))) // True 
+
+    }
+}
+
+EQUALS and HASHCODE contract :
+
+1. if 2 objs are equal according to the equals(Object o) method, then hashcode of both the object must 
+be the same.
+
+2. if 2 objs have same hashcode, doesnt mean that those 2 objects are equal, this is case of collision, can
+be prevented by using better hash function.
+
+3. Also the hashcode() function must return the same integer(hashcode) consistently
+ every time its invoked on a particular object.
 
 
+IN the above code we dint override the hashcode method.
+NOw lets say there are 2 objects e1 and e2 which are equal according to equals() but they have different
+hashcodes(which means they will fall into differnt buckets). So its logically wrong.
+https://www.youtube.com/watch?v=4X5Kgi2VltI&t=666s
 
- ----------------------------------------------------
+So we need to override hashcode method also.
 
+class Employee{
+    ...
 
-
-
-
-
-
-
-
-
-
-
-
-
+    public int hashCode() {
+        return getId(); // id is different and integer, also prime number can be used.
+    }
+}
 
 
+----------------------------------------------------
 
+Is restricted access to derived method allowed ?
 
+eg: parent class have method public calculate() and child class have either of the following
+    private calculate(), protected calculate(), calculate() // default
 
+Ans : in derived, it will give compile time error. TO resolve, make same access to both or child should 
+have more visibilty.
+child can not be more restricted.
 
+----------------------------------------------------
 
+Shadowing of static methods :
+class A{
+    public void meth1(){syso("A method");}
+}
+class B extends A{
+    public void meth1(){syso("B method");}
+}
+class Main{
+    psvm(){
+        A a = new B(); 
+        a.meth1(); // B method (means based on memory allocation method is decided)
+        A a1 = new A(); 
+        a1.meth1(); // A method (means based on memory allocation method is decided)
+    }
+}
+------------------
+Now lets use static methods :
+------------------
+class A{
+    public static void meth1(){syso("A method");}
+}
+class B extends A{
+    public static void meth1(){syso("B method");}
+}
+class Main{
+    psvm(){
+        A a = new B(); 
+        a.meth1(); // A method (means based on reference variable method is decided)
+        A a1 = new A(); 
+        a1.meth1(); // A method (means based on reference variable method is decided)
+    }
+}
+Note: we need to give static in both parent and child class or else it will give compile error.
 
+----------------------------------------------------
 
+----------------------------------------------------
 
+----------------------------------------------------
 
+----------------------------------------------------
 
-
-
-
-
-
-
-
-
-
+----------------------------------------------------

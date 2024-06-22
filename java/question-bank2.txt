@@ -267,10 +267,80 @@ class Main{
 Note: we need to give static in both parent and child class or else it will give compile error.
 
 ----------------------------------------------------
+23:18
+Association 
+
+association depicts the relationships between 2 classes. 2 types:
+1. Aggregation : weak association(loose coupling)
+Eg. public class Driver{ private Car car;}
+Here both objects can exist independently. there is a relationship b/w both but a car can
+exist without driver and also a driver can exist without a car. 
+A car has a driver. A driver has a Car. But both are independent.
+
+2. Composition : strong association (tight coupling)
+Eg. Car and its Engine. (Engine cant exist without the Car)
+public class Car{ private Engine engine; }
+Here both objects can not exist independently. One object cannot exist without the owner object.
 
 ----------------------------------------------------
+What is Covariant return type in java ?
+
+Covariant return type means return type may vary during overriding.
+Before java 5 it was not allowed to override any method if return type is changed in child class.
+But now its possible only if return type is subclass type.
+
+parent has method : public Object methodA(){}; // Object return type
+child has method : public Object methodA(){}; // Object return type(same as parent overriden methodA)
+
+then post java 5, both case 1 and case 2 are valid scenarios and overriding will work fine.
+
+parent has method : public Object methodA(){}; // Object return type
+child has method : public String methodA(){};  // String return type(child of parent methodA return type Object)
+    "String class is child of Object".
 
 ----------------------------------------------------
+Exception Handling Interview questions basic level
+
+1. Whats an exception ?
+
+its an abnormal condition which occurs during the execution of a program and disrupts normal flow 
+of the program. If not handled properly, it can cause the program to terminate abruptly.
+
+eg. class Dog { public String dogName = "Tommy";}
+psvm {
+    Dog dog = null;
+    Syso(dog.dogName); // will throw NullPointerException.
+}
+
+2. How to handle such exceptions ?
+exceptions are handled using 3 blocks :
+Try : encloses set of statmenets which can throw exception hence are required to be monitored.
+Catch : When exception occur, this block catches that exception and work accordingly to handle it or
+        throw it as required.
+Finally : This block gets executed always regardless of exception occurence. Hence cleanup is done here.
+         (if in try we have opened some fileStreams or db connection then we can close it in finally)
+psvm {
+    Dog dog = null;
+    try{
+        Syso(dog.dogName); // will throw NullPointerException.
+    }catch(NullPointerException e) {
+        dog = new Dog();
+        Syso(dog.dogName);
+    }
+}
+
+3. Hierarchy of Exception :
+
+                                    Throwable class
+                Exception                                           Error
+
+    Checked               Unchecked
+
+Checked Exception  : IO exception, SQLException, ClassNotFoundException
+Unchecked Exception : NullPointerException, NumberFormatException, IndexOutOfBoundException
+
+Error : StackOverflow Error, OutOfMemory Error, Virtual Machine error.
+
 
 ----------------------------------------------------
 

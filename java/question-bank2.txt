@@ -267,7 +267,6 @@ class Main{
 Note: we need to give static in both parent and child class or else it will give compile error.
 
 ----------------------------------------------------
-23:18
 Association 
 
 association depicts the relationships between 2 classes. 2 types:
@@ -336,12 +335,82 @@ psvm {
 
     Checked               Unchecked
 
-Checked Exception  : IO exception, SQLException, ClassNotFoundException
-Unchecked Exception : NullPointerException, NumberFormatException, IndexOutOfBoundException
+Checked Exception(compiler will know)  : IO exception, SQLException, ClassNotFoundException
+Unchecked Exception(compiler dont know) : NullPointerException, NumberFormatException, IndexOutOfBoundException
+use try catch to handle Unchecked exception.
 
 Error : StackOverflow Error, OutOfMemory Error, Virtual Machine error.
 
+22:08
+
+Exception Vs Error
+
+Exception:
+-we can recover from exception using try catch block or using throw.
+-compiler will have knowledge about checked exception hence compiler will force u to use try catch block.
+-Exceptions are related to application.
+-Exceptions include both checked and unchecked type.
+-Exceptions in Java are of type java.lang.Exception.
+
+Error:
+-Recovering from error is not possible.
+-Compiler will not have knowledge about unchecked exceptions and errors.
+-Errors are related to environment where application is running.
+-All errors in java are unchecked type.
+-Errors in Java are of type java.lang.Error.
+
+----------------------------------------------------
+Can we write only try block without catch and finally blocks ?
+
+No. Either catch or finally is a must.
+if we dont add catch/finally then error will come ?
+Answer : compile time error saying "insert finally to complete try statement" like this.
+
+----------------------------------------------------
+Can we write any other statements between try catch or finally block?
+(means like this try{} statment; catch(){} like this ?)
+
+NO, try must be followed directly by either catch or finally.
+
+----------------------------------------------------
+Does remaining statements in try block execute after exception occurs ?
+
+No, if exception occurs at a particular point in a try block all statements after that statement (where
+exception occured) will not execute and the flow goes directly either to catch block if there is any or 
+else program terminates, Hence we need finally block to do all the cleanup like closing files or removing 
+locks.
 
 ----------------------------------------------------
 
+What is the difference between throw and throws keywords in java?
+
+Throw :
+its used to explicitly throw exception in java.
+checked exception can not be propogated using throw only.
+throw is used within a method.
+you cant throw multiple exceptions.
+
+Throws:
+Java throws keyword is used to declare an exception.
+Checked exceptions can be progated using throws.
+throws is used with method signature.
+you can declare multiple exceptions.
+----------------------------------------------------
+What happens when an exception is thrown by the main method ?
+
+when an exception is thrown by the main() method, Java Runtime(JRE) terminates the program and prints
+the exception message and the stack trace in-system mode.
+----------------------------------------------------
+
+What do you mean by unreachable catch block error?
+
+This error comes when you keep super classes first and subclasses later. Like here we kept
+Exception(parent) first and NullPointerException(child) later.
+try {}
+catch(Exception e) {}
+catch(NullPointerException e) {} // will compile time unreachable block error.
+
+Hence the order of catch blocks must be from most specific to most general ones.
+
+----------------------------------------------------
 ----------------------------------------------------

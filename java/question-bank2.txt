@@ -413,4 +413,65 @@ catch(NullPointerException e) {} // will compile time unreachable block error.
 Hence the order of catch blocks must be from most specific to most general ones.
 
 ----------------------------------------------------
+
+What is multi catch block ?
+
+To reduce code duplication and make it easier to maintain, java 7 came up with this multicatch block concept.
+
+Here the catch block statements have different exceptions piped rather than putting multiple blocks.
+Eg:
+try{
+    //.........
+}
+catch(NullPointerException | SQLException ex){
+    //.........
+}
+----------------------------------------------------
+Difference between Final, Finally and Finalize keywords in Java?
+final : its a keyword used to apply restrictions on the class, method and variable. The final class
+cant be inherited, final method cant be overridden and final variable cant be changed.
+
+finally : this keyword is used with the try-catch block to provide statements that will always get
+executed even if some exception arises/doesnt arise. Usually, finally is used to close resources.
+
+finalize : is used to perform cleanup processing just before the object is garbage collected. In object/class 
+definition only we use a finalize block and whenever garbage collector is about to cleanup that object from the 
+memory, gc will know that there is some cleanup required (which you added in finalize block) and it executes 
+that cleanup code.
+
+----------------------------------------------------
+Type Promotions : 
+
+public class OverloadingExample{
+    public void add(int a, int b) {
+        syso("add method with 2 arguments"+(a+b)); // 1
+    }
+    public void add(int a, int b, int c){
+        syso("add method with 3 arguments"+(a+b)); //2
+    }
+    public void add(int a, long b){
+        syso("add method with 2 arguments but second arg(b) is of type long"+(a+b)); //3
+    }
+    public void add(long a, int b){
+        syso("add method with 2 arguments but first arg(a) is of type long"+(a+b)); //4
+    }
+}
+public class Main{
+    psvm() {
+        OverloadingExample obj = new OverloadingExample();
+        obj.add(2, 3); // will call the first add method
+        // now lets say there is no method matching (int, int) means 1st add method is not present. In that
+        // case it will call the 3rd method (int, long). int(small) can be adjusted in long(bigger).
+        // means 3 will be promoted to long.
+
+        // now lets say we have only 3 and 4 methods in OverloadingExample.
+        // if we call obj.add(2,3) there is ambiguity. as in both cases either first arg or second arg can be
+        promoted.
+        // so in this case your compiler will give error like : "the method add(int, long) is ambiguous
+            for the type OverloadingExample"
+
+
+    }
+}
+
 ----------------------------------------------------

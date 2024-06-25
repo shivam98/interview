@@ -10,6 +10,13 @@ concise code base).
 If you have ever observed with python, scala, we can do the same thing in very less LOC. By mid 20s,
 Java lost a large market due to these languages. To prevent further loss java upgraded itself from only
 OOPs language to concepts of FP to create concise code base.
+
+Main advantages - 
+- Compact code
+- More readable and reusable code
+- More testable code
+- Parallel operations
+
 ----------------------------------------------------
 What are the new features that got introduced in JAVA8 ?
 
@@ -25,7 +32,124 @@ What are the new features that got introduced in JAVA8 ?
 [LSD, SFO, MDN]
 
 ----------------------------------------------------
+
+ 
+what are lambda expressions ?
+lambda expression is an anonymous function (without name, without return type and access modifier
+and having one lambda (->) symbol)
+eg:
+public void add(int a, int b) {
+    syso(a+b);
+}
+with lambda expression :
+(a,b)-> syso(a+b); // using biconsumer(functional interface taking 2 args and returning nothing).
+
+BiConsumer<Integer, Integer> biconsumer = (a,b)-> syso(a+b);
+biconsumer.accept(2,4); // this is how to call this lambda expression.
+
 ----------------------------------------------------
+what are functional interfaces? 
+
+Functional interfaces are those interfaces which can have only one abstract method.
+It can have any number of static method, default methods. No restriction on that.
+There are many functional interfaces already present in Java such as eg. Comparable, Runnable.
+lambda expressions are actually referenced by functional interfaces(eg. BiConsumer).
+
 ----------------------------------------------------
+
+Can you create your own functional interface ?
+As we know functional interface is an interface with exactly one Single Abstract method and
+can have many multiple static or default methods.
+
+To create our own Functional interface, You can do the following steps:
+- create an interface.
+- Annotate that with @FunctionalInterface.
+- Define exactly one abstract method.
+- There is no restriction on number of static or default methods.
+
+Java can implicitly identify functional interface but still you can also annotate it with
+@FunctionalInterface. It just gives you security that in case if you by mistake add 2 abstract methods
+then compiler will throw compile time error.
+
 ----------------------------------------------------
+
+What is method referencing in Java8 ?
+
+Method referencing is a replacement of lambda expression. It is used to refer method of Functional Interface
+to an existing method. Mainly it is used for code reusability.
+
+Functional Interface's Abstract method can be mapped to a specific existing method using Double
+colon operator(::). This is method reference.
+Hence method reference is an alternative of lambda expression.
+
+whenever we have existing implementation of Abstract method of our functional interface then we
+go for method referencing. If no such method like testImplementation() is available then go for 
+lambda expression.
+
+Code ex :
+
+public class MethodReferenceDemo{
+    psvm() {
+        // with method referencing(can be reused) -
+        FunctionalInterfaceDemo functionalinterfaceDemo = Test :: testImplementation;
+        functionalinterfaceDemo.singleAbstractmethod();
+        // with lambda expression -
+        //FunctionalInterfaceDemo functionalinterfaceDemo = ()-> syso("implementation of single abs method");
+        // f.singleAbstractmethod();
+    }
+}
+public class Test{
+    public static void testImplementation(){
+        syso("this is implementation of your abs method that can be reused.");
+    }
+}
+@FunctionalInterface
+class FunctionalInterfaceDemo {
+    //...
+}
+----------------------------------------------------
+What are default methods ?
+
+Default method is a way for adding new methods to the interface without affecting the implementing
+classes. Hence with this new feature Java people defended many compile time errors that may arise
+due to unimplemented methods of interface.
+eg.
+interface Animal{
+    void legs();
+    default void eyes(){
+        syso("2 eyes");
+    }
+}
+the use of these default methods is backward compatibilty which means if JDK modifies any Interface(
+without default method) then the classes which implement this Interface will break.
+on the other hand if you add the default method in an interface then you will be able to provide the
+default implementation in the interface itself. this wont affect the implementing classes.
+----------------------------------------------------
+
+----------------------------------------------------
+
+----------------------------------------------------
+
+----------------------------------------------------
+
+----------------------------------------------------
+
+----------------------------------------------------
+
+----------------------------------------------------
+
+----------------------------------------------------
+
+
+----------------------------------------------------
+
+
+----------------------------------------------------
+
+
+----------------------------------------------------
+
+
+----------------------------------------------------
+
 ----------------------------------------------------

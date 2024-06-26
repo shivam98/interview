@@ -104,7 +104,7 @@ public class Test{
     }
 }
 @FunctionalInterface
-class FunctionalInterfaceDemo {
+interface FunctionalInterfaceDemo {
     //...
 }
 ----------------------------------------------------
@@ -125,16 +125,87 @@ without default method) then the classes which implement this Interface will bre
 on the other hand if you add the default method in an interface then you will be able to provide the
 default implementation in the interface itself. this wont affect the implementing classes.
 ----------------------------------------------------
+22:23
+
+Is it necessary to override default methods ?
+
+default methods have dummy implementation.If you want to use that dummy implementation in your implementing
+class then you can use it, or else if you want to provide your implementation that also you can do.
+
+----------------------------------------------------
+Is default keyword an access modifier ?
+
+default is not the access modifier like public or protected or private.
+For default access modifier we dont use any keyword.
+
+Hence default keyword was only used in classes till 1.8 version for switch case only but never in interface.
+Now its used for default methods in interface to provide a default implementation for all implementing 
+classes to use.
+
+----------------------------------------------------
+How to override a default method ?
+
+public interface InterfaceDemo{
+    default void printName() {
+        syso("welcome to code decode");
+    }
+}
+
+Just keep the method signature(method name+ arg) same in the implementing class and provide your 
+own implementation. dont use default keyword before method in the implementing class as it will give 
+error(its used for switch cases in places other than interface).
+Also, use public access specifier in implenting class for the method, because you cant reduce
+the visibility of method from public(interface) to anything less than public(default, protected,private).
+
+Note: in java8 by default all methods are public, all variables are public static and final.
+
+----------------------------------------------------
+Can you use hashcode default implementation in interface ?
+
+You cant give your default implementation of hashcode() in interface for all implementing classes to use.
+We are not allowed to override Object class's method as default methods in interface else will get
+compile time error "".
+All implementing classes by default has access to all methods of object class.
 
 ----------------------------------------------------
 
-----------------------------------------------------
+How default methods in interfaces cope up with the diamond problem ?
+
+So diamond problem arise when a class extends 2 classes there is ambiguity if both parent classes has
+the same method with differnt implementation which one the child class will use.
+This problem later was solved with the help of interface(because interface we dont need to provide the
+implementation in the parent).
+
+But after java1.8 with the arrival of default methods again interfaces can provide a default implementation
+using default methods, diamond problem arises again.
+
+How to resolve ?
+In Java, in such situation, The code will NOT compile. But there is a solution as below :
+Solution to diamond problem : use InterfaceName.super.methodName();
+
+public class DiamondProblem implements I1, I2 {
+    @Override
+    public class m1() {
+        I1.super.m1(); // or I2.super.m1() , here both I1, I2 has same default method m1().
+    }
+}
 
 ----------------------------------------------------
+Why static methods were introduced in JAVA8 (in interfaces)?
 
-----------------------------------------------------
+Only reason for introducing static methods in interfaces is that you can call those methods with just
+interface name. No need to create class and then its object.
 
-----------------------------------------------------
+Since interface can never contain :
+ - Constructors.
+ - static blocks.
+ - nothing costly in terms of performance(class is costly in terms of memory and performance).
+
+ Hence we dont need to create object and hence if you have everything static, then go for interface
+ rather than class. You can use it for some utility methods.
+
+ (You have this flexibility only after java8, before that you need to create a class).
+
 
 ----------------------------------------------------
 

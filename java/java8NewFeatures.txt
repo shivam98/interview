@@ -125,7 +125,7 @@ without default method) then the classes which implement this Interface will bre
 on the other hand if you add the default method in an interface then you will be able to provide the
 default implementation in the interface itself. this wont affect the implementing classes.
 ----------------------------------------------------
-22:23
+
 
 Is it necessary to override default methods ?
 
@@ -209,10 +209,53 @@ Since interface can never contain :
 
 ----------------------------------------------------
 
-----------------------------------------------------
+Are static methods available to implementing classes by default ?
+static methods are not available to implementing classes.
+they are not default methods, they are static.
+hence you can call these methods using interface name explicitly from the implementing classes as implementing
+classes wont have access to these methods directly. (This is disadvantage of static methods of interface that 
+its not available to implementing classes).
 
+----------------------------------------------------
+Predicates, Consumers, Suppliers, Functions, BiXXX, Streams, ParallelStreams -
+
+What are predicates ?
+Predicate is a predefined functional interface (having only 1 abstract method)
+the only abstract method of predicate is test(T t) => public boolean test(T t){}
+used whenever we want to check some boolean condition then you can go for Predicates.
+Syntax : Predicate<String> checkLength = s -> s.length()>5;
+checkLength.test("code decode"); // true;
+
+input to a predicate can be anything like String, Integer, Employee so only 1 arg is required as input.
+return type is not required as its always boolean only.
+
+Advantages of predicates ?
+THere is shorthand operation also which could have given same result(using ? and :) then why predicates
+its because of its code reusability
+If you have same conditions being used 100 times in a program then you can write once and just use 100 times
+by using the test method(different strings can be tested).
+Conditional checks are holded by functional interfaces.
+
+WHat is predicate Joining ?
+you can combine predicates in serial predicate
+Three ways to join : And, Or, Negate
+Eg if you want to test 2 conditions 
+To check length of string>5
+To check length is even 
+
+So you can use 2 different predicates checkLength and checkEvenLength like this
+checkLength.and(checkEvenLength).test("code decode"); equivalent to -> (s.length()%2==0 && s.length()>5).
+Similarly you can do for Or and Negate(takes one argument, checkLength.negate().test("codeDecode") -> false).
 
 ----------------------------------------------------
+What are functions ?
+Function is also a predefined functional interface.
+the only abs method for function is apply(T t).
+Given some input, perform some operation on input and then produce / return result (not necessarily a boolean val)
+Function takes 1 input and returns 1 output.
+In predicate we used take 1 input and return type was always boolean
+In function we take 1 input and return type is not fixed, hence we declare both input type and return type.
+
 
 
 ----------------------------------------------------

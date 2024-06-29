@@ -219,7 +219,7 @@ its not available to implementing classes).
 ----------------------------------------------------
 Predicates, Consumers, Suppliers, Functions, BiXXX, Streams, ParallelStreams -
 
-What are predicates ?
+What are predicates [java.util.function pkg] ?
 Predicate is a predefined functional interface (having only 1 abstract method)
 the only abstract method of predicate is test(T t) => public boolean test(T t){}
 used whenever we want to check some boolean condition then you can go for Predicates.
@@ -248,7 +248,7 @@ checkLength.and(checkEvenLength).test("code decode"); equivalent to -> (s.length
 Similarly you can do for Or and Negate(takes one argument, checkLength.negate().test("codeDecode") -> false).
 
 ----------------------------------------------------
-What are functions ?
+What are functions [java.util.function pkg] ?
 Function is also a predefined functional interface.
 the only abs method for function is apply(T t).
 Given some input, perform some operation on input and then produce / return result (not necessarily a boolean val)
@@ -256,12 +256,46 @@ Function takes 1 input and returns 1 output.
 In predicate we used take 1 input and return type was always boolean
 In function we take 1 input and return type is not fixed, hence we declare both input type and return type.
 
+Eg. Function<Integer, Integer> squarMe = i -> i*i; // Funtion<T, R>
+syso("square of 5 is", squareMe.apply(5));
 
+What if functional chaining ?
+We can combine/chain multiple functions together with "andThen".
+There are 2 ways to combine functions:
+    - f1.andThen(f2).apply(Input); // first f1 then f2
+    - f1.compose(f2).apply(Input); // first f2 then f1 [you can do f2 and then f1 also]
+Multiple functions can be chained together like -
+f1.andThen(f2).andThen(f3).andThen(f4).apply(Inputs);
+
+ex - 
+Function<Integer, Integer> doubleIt = i->i*2;
+Function<Integer, Integer> cubeIt = i->i*i*i;
+syso("first double then cube", doubleIt.andThen(cubeIt).apply(2)); //64
+syso("first cube then double", doubleIt.compose(cubeIt).apply(2)); //16
 
 ----------------------------------------------------
+What is Consumer functional interface?
+Predicate<T> takes 1 input and returns boolean.
+Function<T, R> takes 1 input and return type is produced after doing some operation on the input.
 
+Consumer<T> -> It will consume item. Consumers never return anything(never supply), they just consume.
+uses accept(T t) as the only abstract method.
+
+Eg: take any object and save it in the Database and dont return anything.
+Interface Consumer<T>{
+    public void accept(T t){}
+}
+
+What is consumer chaining ?
+We can combine / chain multiple consumers together with andThen.
+There is only one way to combine consumers.
+ - c1.andThen(c2).accept(Input); first c1 then c2.
+ - NO compose() in consumer.[you can do c2 and then c1 also]
+ - Multiple consumers can be chained together like:
+    c1.andThen(c2).andThen(c3).andThen(c4).apply(inputs);
 
 ----------------------------------------------------
+What is supplier functional interface ?
 
 
 ----------------------------------------------------

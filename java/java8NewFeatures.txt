@@ -297,6 +297,62 @@ There is only one way to combine consumers.
 ----------------------------------------------------
 What is supplier functional interface ?
 
+Supplier<R> -> It will just supply required objects and will not take any input.
+Its always going to supply never consume/take any input.
+Eg: always supply me current date.
+Interface Supplier<R>{
+    public R get();
+}
+No chaining as no input is given. Only it gives you output.
+It uses method get()
+Supplier<Date> currentDate = () -> new Date();
+syso(currentDate.get()); // outputs current date
+
+Advantages of supplier : 1. Write once use anywhere, 2. Code reusability
+
+----------------------------------------------------
+
+Use of BiConsumer, Bifunction, BiPredicate and why no BiSupplier?
+
+Till now we had :
+Predicate<T> ->test() ->returns boolean
+Function <T, R> -> apply() -> returns anything
+Consumer<T> -> accept() -> returns nothing
+Supplier<R> -> get() -> returns anything
+
+What if we need 2 arguments(inputs) for operation?
+Then we need BiXYZfunctional Functional interfaces.
+There is no input in supplier so no 1 or 2 input args needed, hence there is no BiSupplier.
+
+Q: If we want to operate on 3 arguments, then tripredicate ?
+A: There are no TriPredicate or TriFunction etc.
+No QuadPredicate No QuadFunction and so on.
+Java 8 has inbuilt Functional interfaces which can take 1 or 2 arguments, no more.
+
+----------------------------------------------------
+What are streams ?
+If we want to process bulk objects of collection then go for streams concept.
+Way to operate on collection in java 8 is Stream.
+Its a special iterator class that allows processing collections of objects in a functional manner.
+
+Eg : fetch all objects from collection of list whose value is greater than 15
+
+List<Integer> li = new ArrayList<Integer>(); // then add {5,16,7,21}
+List<Integer> filtered = li.stream()
+                        .forEach(val-> val>15)
+                        .collect(Collectors.toList()); {16, 21}
+
+----------------------------------------------------
+
+----------------------------------------------------
+
+----------------------------------------------------
+
+----------------------------------------------------
+
+----------------------------------------------------
+
+----------------------------------------------------
 
 ----------------------------------------------------
 

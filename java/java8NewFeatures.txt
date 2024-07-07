@@ -22,8 +22,8 @@ What are the new features that got introduced in JAVA8 ?
 
 1. Lambda Expressions.
 2. Stream API.
-3. Default methods in interface.
-4. Static methods.
+3. Default methods in interface. [explained above]
+4. Static methods. [explained above]
 5. Functional Interface.
 6. Optionals.
 7. Method References.
@@ -206,8 +206,26 @@ Since interface can never contain :
 
  (You have this flexibility only after java8, before that you need to create a class).
 
+Also, static methods implementation can not be changed in child classes. Thus implementing
+class need not and cannot change the definition whereas in default methods we can change
+implementation in child class.
+
+public interface Animal{
+    static public void livesIn() {
+        syso("lives in water");
+    }
+}
+// implementing class => Animal.livesIn(); 
+----------------------------------------------------
+Why do we need static methods if we have default methods ?
+
+1. interface static method helps us in providing security by not allowing implementation 
+classes to override them.
+2. interface static methods are good for providing utility methods, for ex null checking, login 
+etc (which are common utilities) and whose definition never change.
 
 ----------------------------------------------------
+
 
 Are static methods available to implementing classes by default ?
 static methods are not available to implementing classes.
@@ -344,11 +362,48 @@ List<Integer> filtered = li.stream()
 
 ----------------------------------------------------
 
+Why streams were introduced in java 8 if we already had java.io.stream?
+
+Java io streams is a sequence of characters or binary data which is used to be written to a file or to read data from a file.
+While streams java 1.8 is no where related to files, its related to collection object.
+Java io streams related to file whereas java 8 streams are related to collection object.
+Hence if we need to perform some operations on collection there we should go for streams.
+
 ----------------------------------------------------
+Difference between streams and collection ?
+
+To represent group of collection as single entity then we should use collection concept.
+If we want to perform operation on bulk objects in collection then we should go for Streams.
+
+----------------------------------------------------
+Steps to create and process a stream ?
+We can get stream object by :
+
+Stream s = collectionObject.stream();
+Once we get stream object we can process the object of collection.
+Processing of stream consists of 2 steps/ stages
+1. Configuration of stream
+2. Processing that configuration
+Configuration can be done by 
+ - Map 
+ - Filter
+Processing can be done by - 
+collect, count, Sorted, min max, forEach, toArray, of().
+
+Stream s = collectionObject.stream().filter(i 🡪 i % 2 ==0);
+
+What if we don’t want to filter out.
+We rather want to create new object against each existing stream object based on some function.
+
+EG in given stream create new object by squaring  its value
+If we want to fetch / filter objects from collection like eg : filter only even numbers from array list collection the use Filter for configuration of stream.
+If we want to perform some operation on each objects of the collection then create another mapped object with different value(after operation is performed ) for each object of that collection, then use map.
+In filter, because of filtering, number of objects in filtered list is less than original list While in Map  same number of objects are there in both new and original list created.
 
 ----------------------------------------------------
 
-----------------------------------------------------
+
+
 
 ----------------------------------------------------
 

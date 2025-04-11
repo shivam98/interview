@@ -6,7 +6,7 @@ An interface having no data member and member fn, An empty interface basically. 
 -------------------------------------------------------
 
 Can you override a private or static method in java ?
-1. you can override  a private or static method in java.
+1. you cant override  a private or static method in java.
 2. cant override private method because its not accessible in the child class. If you try to override
     in the sub class it will create another private method in subclass which will be different from the parent one.
 3. For static method if you create  a similar method  with same return type and same method args in child class,

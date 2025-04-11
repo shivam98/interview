@@ -1,4 +1,4 @@
-Java 8 New Features Interview Questions
+ Java 8 New Features Interview Questions
 
 Why Java 8? Main agenda behind Java 8 ?
 
@@ -193,8 +193,7 @@ public class DiamondProblem implements I1, I2 {
 ----------------------------------------------------
 Why static methods were introduced in JAVA8 (in interfaces)?
 
-Only reason for introducing static methods in interfaces is that you can call those methods with just
-interface name. No need to create class and then its object.
+ interface name. No need to create class and then its object.
 
 Since interface can never contain :
  - Constructors.
@@ -357,7 +356,7 @@ Eg : fetch all objects from collection of list whose value is greater than 15
 
 List<Integer> li = new ArrayList<Integer>(); // then add {5,16,7,21}
 List<Integer> filtered = li.stream()
-                        .forEach(val-> val>15)
+                        .filter(val-> val>15)
                         .collect(Collectors.toList()); {16, 21}
 
 ----------------------------------------------------
@@ -372,7 +371,7 @@ Hence if we need to perform some operations on collection there we should go for
 ----------------------------------------------------
 Difference between streams and collection ?
 
-To represent group of collection as single entity then we should use collection concept.
+To represent group of data as single entity then we should use collection concept.
 If we want to perform operation on bulk objects in collection then we should go for Streams.
 
 ----------------------------------------------------

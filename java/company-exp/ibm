@@ -1,0 +1,76 @@
+
+1. introduction, overview of the project currently working on?
+2. how much you rate yourself in java ?
+3. what is immutabilty, give examples, how to make a class immutable ?
+4. if string is immutable, is the following line allowed in java ?
+    String s1 = "hello"
+    s2 = "world", or will it throw error
+5. String s1 = "hello"; String s2 = "world"
+    what will be output of s1 == s2 ?
+6. String s1 = "hello"; String s2 = "wo" + "rld"
+    what will be output of s2 == s2 ?
+7. Explain diamond problem in java.(explained using classes and multiple inheritence)
+    follow up - is multiple inheritence allowed in java(said no, but can be achieved using interfaces)
+    follow up - do you know there are ways where even with interfaces it can cause diamond problem - (
+    said yes - if we are using default methods in interface, then diamond prblem arise again)
+    follow up - how to resolve diamond problem in such case - explained 2 ways (
+        1. either provide your implementation in subclass
+        2. call specific parent class using A.super.methodName();
+    )
+8. below code - output ?
+    for (int i = 0; i < 3; i++) {
+        System.out.print(i);
+        i++;
+    } // output- 02
+9. Explain Spring and Springboot and advantages of both ?
+    -- follow up - what is dependency injection - explained.
+
+10. give some annotations u worked with in spring boot ?
+    - @SpringBootApplication, @Component, @Configuration, @Autowired etc
+    why is autowired used
+    where can we use autowired ?
+
+11. explain some features of java8 ? explained all(7-8 are there including fucntional interface).
+    follow up - functional interfaces with example ?
+    follow up - @functional interface use
+
+12. Can we override static methods - no, followup - why ? (becuz static methods belong to class and not object)
+
+13. coding question - find first non repeating character using streams
+
+14. coding question - Runlength encoding compression - aaaabbbcc -> a4b3c2
+
+code for 13 and 14 -
+public class Test {
+    public static void main(String[] args) {
+    // 1. first non repeating character
+//        String input = "sswi";
+//        char ans = input.chars().
+//                mapToObj(ch -> (char) ch).
+//                filter(ch-> input.indexOf(ch) == input.lastIndexOf(ch)).
+//                findFirst().orElse(null);
+//        System.out.println(ans);
+
+
+// 2.RLE
+        String input = "aaaabbbcc";
+        String ans = "";
+        int count = 1;
+        char current = input.charAt(0);
+        for(int i=0; i<input.length()-1; i++) {
+            if(input.charAt(i) == input.charAt(i+1)) {
+                count+=1;
+            } else {
+                ans += String.valueOf(current);
+                ans += String.valueOf(count);
+                count = 1;
+                current = input.charAt(i+1);
+            }
+        }
+        ans += String.valueOf(current);
+        ans += String.valueOf(count);
+        System.out.println(ans);
+    }
+}
+
+

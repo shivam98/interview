@@ -1,0 +1,34 @@
+---------------------------------------------------
+HCL INTERVIEW - 
+---------------------------------------------------
+
+java 8 new features.
+
+convert array of interger to array of string using stream
+List<String> stringList = Arrays.stream(arr)
+    .map(String::valueOf)
+    .collect(Collectors.toList());
+
+difference between map and flatmap
+
+difference hashmap and concurrent hashmap
+
+where we use concurrent hashmap ?
+https://www.geeksforgeeks.org/difference-hashmap-concurrenthashmap/
+
+Interface contians default and static methods so, if in child class
+we override those static and default methods what will happen
+
+
+class A implements B {
+	
+}
+class Main{
+	obj A = new B(); // not sure if its correct
+	A.staticB();
+	A.defaultB();
+	
+}
+
+optional.of and optional.nullable difference.
+springboot annotations, service discovery, API gateway.

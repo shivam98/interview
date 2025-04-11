@@ -157,7 +157,7 @@ public class Employee {
     private int id; private String name;
     // getters setters
     
-    // @Override ?? need or not ?
+    // @Override ?? need or not ? -- not required, but recommended tells compiler its an override fn
     public boolean equals(Object o) {
         if(o==null || getClass() != o.getClass()) {
             return false;
@@ -180,7 +180,7 @@ public class Main{
 // below does the memory comparison
         Syso("shallow comparison", (e1==e2)); // False 
 // below does the memory comparison and internal details also
-        Syso("deep comparison", (e1.equals(e2))) // False 
+        Syso("deep comparison", (e1.equals(e2))) // False (since equals default behaviour is like ==)
 
 // now we want to make sure 2 objects are same if their id is same, for that we will orverride equals 
     method in the Employee class

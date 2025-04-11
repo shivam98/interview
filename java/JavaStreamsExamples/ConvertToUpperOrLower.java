@@ -19,5 +19,29 @@ public class ConvertToUpperOrLower {
       .collect(Collectors.toList());
 
     System.out.println("Lowercase Strings: " + lowercaseStrings);
+
+
+
+    // practice
+    List < String > c = Arrays.asList("RED", "grEEn", "white", "Orange", "pink");
+    c.stream().map(str-> str.toUpperCase()).collect(Collectors.toList());
+    String input = "helloworld";
+//    Character result = input.chars()
+//            .mapToObj(intVal -> (char)intVal)
+//            .filter(ch -> input.indexOf(ch) == input.lastIndexOf(ch))
+//            .findFirst()
+//            .orElse(null);
+//    input.chars().mapToObj(val->(char)val).collect(Collectors.groupingBy(ch->ch, Collectors.counting()));
+//    Map<Character, Long> freq = input.chars()
+//            .mapToObj(c -> (char) c)
+//            .collect(Collectors.groupingBy(ch -> ch, Collectors.counting()));
+
+    // remove all duplicates
+    // output only employees having sal more than 50k
+    // first non repeated character in  a string
+    // frequency of each character in a string
+
+
+
   }
 }
